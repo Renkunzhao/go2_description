@@ -1,54 +1,23 @@
-## go2_urdf
-This repository contains the urdf model of go2.
+# go2\_description
 
+This ROS2 package provides the URDF model for the Unitree Go2 robot, ported from the original work by Unitree Robotics.
 
-## Build the library
-Create a new catkin workspace:
+  - Original Repository: [https://github.com/unitreerobotics/unitree\_ros.git](https://github.com/unitreerobotics/unitree_ros.git)
+  - Original Author: Unitree Robotics
+  - ROS 2 Port Maintainer: Kunzhao Ren
+
+-----
+
+## Usage
+
+After a successful build, you can use the launch file to visualize the robot in RViz.
+```bash
+cd ~/go2_ws
+source /opt/ros/humble/setup.bash
+colcon build --packages-select go2_description 
+source install/setup.bash
+ros2 launch go2_description go2_rviz.launch.py
 ```
-# Create the directories
-# Do not forget to change <...> parts
-mkdir -p <directory_to_ws>/<catkin_ws_name>/src
-cd <directory_to_ws>/<catkin_ws_name>/
+This will open an RViz window with the Go2 URDF model.
 
-# Initialize the catkin workspace
-catkin init
-```
-
-Clone this library:
-```
-# Navigate to the directory of src
-# Do not forget to change <...> parts
-cd <directory_to_ws>/<catkin_ws_name>/src
-git clone git@github.com:unitreerobotics/go2_urdf.git
-```
-
-Build:
-```
-# Build it
-catkin build
-
-# Source it
-source <directory_to_ws>/<catkin_ws_name>/devel/setup.bash
-```
-
-
-
-## Run the library
-```
-# Show urdf model of go2 in Rviz
-roslaunch go2_description go2_rviz.launch
-
-```
-
-## When used for isaac gym or other similiar engine 
-
-Collision parameters in urdf can be amended to better train the robot:
-
-Open "go2_description.urdf" in "./go2_description/urdf",
-and amend the ` box size="0.213 0.0245 0.034" ` in links of "FL_thigh", "FR_thigh", "RL_thigh", "RR_thigh".
-
-For example, change previous values to ` box size="0.11 0.0245 0.034" ` means the length of the thigh is shortened from 0.213 to 0.11, which can avoid unnecessary collision between the thigh link and the calf link. 
-
-The collision model before and after the above amendment are shown as "Normal_collision_model.png" and "Amended_collision_model.png" respectively.
-
-
+-----
